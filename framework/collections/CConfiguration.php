@@ -47,7 +47,7 @@ class CConfiguration extends CMap
 	public function __construct($data=null)
 	{
 		if(is_string($data))
-			parent::__construct(require($data));
+			parent::__construct(require_once($data));
 		else
 			parent::__construct($data);
 	}
@@ -69,7 +69,7 @@ class CConfiguration extends CMap
 	 */
 	public function loadFromFile($configFile)
 	{
-		$data=require($configFile);
+		$data=require_once($configFile);
 		if($this->getCount()>0)
 			$this->mergeWith($data);
 		else

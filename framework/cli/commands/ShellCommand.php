@@ -75,7 +75,7 @@ EOD;
 		Yii::setPathOfAlias('application',null);
 
 		ob_start();
-		$config=require($entryScript);
+		$config=require_once($entryScript);
 		ob_end_clean();
 
 		// oops, the entry script turns out to be a config file

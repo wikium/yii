@@ -125,7 +125,7 @@ class YiiBase
 				if($forceInclude)
 				{
 					if(is_file($classFile))
-						require($classFile);
+                        require_once($classFile);
 					else
 						throw new CException(Yii::t('yii','Alias "{alias}" is invalid. Make sure it points to an existing PHP file and the file is readable.',array('{alias}'=>$alias)));
 					self::$_imports[$alias]=$alias;
@@ -162,7 +162,7 @@ class YiiBase
 				if($forceInclude)
 				{
 					if(is_file($path.'.php'))
-						require($path.'.php');
+                        require_once($path.'.php');
 					else
 						throw new CException(Yii::t('yii','Alias "{alias}" is invalid. Make sure it points to an existing PHP file and the file is readable.',array('{alias}'=>$alias)));
 					self::$_imports[$alias]=$className;
@@ -240,9 +240,9 @@ class YiiBase
 		}
 		// use include so that the error PHP file may appear
 		if(isset(self::$classMap[$className]))
-			include(self::$classMap[$className]);
+            include_once(self::$classMap[$className]);
 		elseif(isset(self::$_coreClasses[$className]))
-			include(YII_PATH.self::$_coreClasses[$className]);
+            include_once(YII_PATH.self::$_coreClasses[$className]);
 		elseif($classMapOnly)
 			return false;
 		else
@@ -257,7 +257,7 @@ class YiiBase
 						$classFile=$path.DIRECTORY_SEPARATOR.$className.'.php';
 						if(is_file($classFile))
 						{
-							include($classFile);
+                            include_once($classFile);
 							if(YII_DEBUG && basename(realpath($classFile))!==$className.'.php')
 								throw new CException(Yii::t('yii','Class name "{class}" does not match class file "{file}".', array(
 									'{class}'=>$className,
@@ -268,13 +268,13 @@ class YiiBase
 					}
 				}
 				else
-					include($className.'.php');
+                    include_once($className.'.php');
 			}
 			else  // class name with namespace in PHP 5.3
 			{
 				$namespace=str_replace('\\','.',ltrim($className,'\\'));
 				if(($path=self::getPathOfAlias($namespace))!==false && is_file($path.'.php'))
-					include($path.'.php');
+                    include_once($path.'.php');
 				else
 					return false;
 			}
@@ -610,7 +610,7 @@ class YiiBase
 }
 spl_autoload_register(array('YiiBase','autoload'));
 if(!class_exists('YiiBase', false))
-	require(dirname(__FILE__).'/YiiBase.php');
+    require_once(dirname(__FILE__).'/YiiBase.php');
 class Yii extends YiiBase
 {
 }
@@ -937,7 +937,7 @@ abstract class CModule extends CComponent
 		$this->_parentModule=$parent;
 		// set basePath as early as possible to avoid trouble
 		if(is_string($config))
-			$config=require($config);
+			$config=require_once($config);
 		if(isset($config['basePath']))
 		{
 			$this->setBasePath($config['basePath']);
@@ -1198,7 +1198,7 @@ abstract class CApplication extends CModule
 		Yii::setApplication($this);
 		// set basePath as early as possible to avoid trouble
 		if(is_string($config))
-			$config=require($config);
+			$config=require_once($config);
 		if(isset($config['basePath']))
 		{
 			$this->setBasePath($config['basePath']);
@@ -1842,7 +1842,7 @@ class CWebApplication extends CApplication
 			if(is_file($classFile))
 			{
 				if(!class_exists($className,false))
-					require($classFile);
+                    require_once($classFile);
 				if(class_exists($className,false) && is_subclass_of($className,'CController'))
 				{
 					$id[0]=strtolower($id[0]);
@@ -3553,11 +3553,11 @@ abstract class CBaseController extends CComponent
 		{
 			ob_start();
 			ob_implicit_flush(false);
-			require($_viewFile_);
+            require_once($_viewFile_);
 			return ob_get_clean();
 		}
 		else
-			require($_viewFile_);
+            require_once($_viewFile_);
 	}
 	public function createWidget($className,$properties=array())
 	{
@@ -6211,7 +6211,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 		{
 			$skinFile=$this->skinPath.DIRECTORY_SEPARATOR.$className.'.php';
 			if(is_file($skinFile))
-				$this->_skins[$className]=require($skinFile);
+				$this->_skins[$className]=require_once($skinFile);
 			else
 				$this->_skins[$className]=array();
 			if(($theme=Yii::app()->getTheme())!==null)
@@ -6219,7 +6219,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 				$skinFile=$theme->getSkinPath().DIRECTORY_SEPARATOR.$className.'.php';
 				if(is_file($skinFile))
 				{
-					$skins=require($skinFile);
+					$skins=require_once($skinFile);
 					foreach($skins as $name=>$skin)
 						$this->_skins[$className][$name]=$skin;
 				}
@@ -6651,7 +6651,7 @@ class CClientScript extends CApplicationComponent
         else
         {
             if($this->corePackages===null)
-                $this->corePackages=require(YII_PATH.'/web/js/packages.php');
+                $this->corePackages=require_once(YII_PATH.'/web/js/packages.php');
             if(isset($this->corePackages[$name]))
                 return true;
         }
@@ -6670,7 +6670,7 @@ class CClientScript extends CApplicationComponent
 		else
 		{
 			if($this->corePackages===null)
-				$this->corePackages=require(YII_PATH.'/web/js/packages.php');
+				$this->corePackages=require_once(YII_PATH.'/web/js/packages.php');
 			if(isset($this->corePackages[$name]))
 				$package=$this->corePackages[$name];
 		}

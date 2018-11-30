@@ -80,6 +80,6 @@ class CWebLogRoute extends CLogRoute
 			return;
 
 		$viewFile=YII_PATH.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$view.'.php';
-		include($app->findLocalizedFile($viewFile,'en'));
+        include_once($app->findLocalizedFile($viewFile,'en'));
 	}
 }

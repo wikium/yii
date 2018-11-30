@@ -566,7 +566,7 @@ class CClientScript extends CApplicationComponent
         else
         {
             if($this->corePackages===null)
-                $this->corePackages=require(YII_PATH.'/web/js/packages.php');
+                $this->corePackages=require_once(YII_PATH.'/web/js/packages.php');
             if(isset($this->corePackages[$name]))
                 return true;
         }
@@ -602,7 +602,7 @@ class CClientScript extends CApplicationComponent
 		else
 		{
 			if($this->corePackages===null)
-				$this->corePackages=require(YII_PATH.'/web/js/packages.php');
+				$this->corePackages=require_once(YII_PATH.'/web/js/packages.php');
 			if(isset($this->corePackages[$name]))
 				$package=$this->corePackages[$name];
 		}

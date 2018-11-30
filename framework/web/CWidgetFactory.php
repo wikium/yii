@@ -174,7 +174,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 		{
 			$skinFile=$this->skinPath.DIRECTORY_SEPARATOR.$className.'.php';
 			if(is_file($skinFile))
-				$this->_skins[$className]=require($skinFile);
+				$this->_skins[$className]=require_once($skinFile);
 			else
 				$this->_skins[$className]=array();
 
@@ -183,7 +183,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 				$skinFile=$theme->getSkinPath().DIRECTORY_SEPARATOR.$className.'.php';
 				if(is_file($skinFile))
 				{
-					$skins=require($skinFile);
+					$skins=require_once($skinFile);
 					foreach($skins as $name=>$skin)
 						$this->_skins[$className][$name]=$skin;
 				}

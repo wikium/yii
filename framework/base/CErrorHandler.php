@@ -337,7 +337,7 @@ class CErrorHandler extends CApplicationComponent
 		$data['version']=$this->getVersionInfo();
 		$data['time']=time();
 		$data['admin']=$this->adminInfo;
-		include($this->getViewFile($view,$data['code']));
+        include_once($this->getViewFile($view,$data['code']));
 	}
 
 	/**

@@ -284,7 +284,7 @@ class YiiBase
 				if($forceInclude)
 				{
 					if(is_file($classFile))
-						require($classFile);
+                        require_once($classFile);
 					else
 						throw new CException(Yii::t('yii','Alias "{alias}" is invalid. Make sure it points to an existing PHP file and the file is readable.',array('{alias}'=>$alias)));
 					self::$_imports[$alias]=$alias;
@@ -325,7 +325,7 @@ class YiiBase
 				if($forceInclude)
 				{
 					if(is_file($path.'.php'))
-						require($path.'.php');
+                        require_once($path.'.php');
 					else
 						throw new CException(Yii::t('yii','Alias "{alias}" is invalid. Make sure it points to an existing PHP file and the file is readable.',array('{alias}'=>$alias)));
 					self::$_imports[$alias]=$className;
@@ -432,9 +432,9 @@ class YiiBase
 
 		// use include so that the error PHP file may appear
 		if(isset(self::$classMap[$className]))
-			include(self::$classMap[$className]);
+            include_once(self::$classMap[$className]);
 		elseif(isset(self::$_coreClasses[$className]))
-			include(YII_PATH.self::$_coreClasses[$className]);
+            include_once(YII_PATH.self::$_coreClasses[$className]);
 		elseif($classMapOnly)
 			return false;
 		else
@@ -449,7 +449,7 @@ class YiiBase
 						$classFile=$path.DIRECTORY_SEPARATOR.$className.'.php';
 						if(is_file($classFile))
 						{
-							include($classFile);
+                            include_once($classFile);
 							if(YII_DEBUG && basename(realpath($classFile))!==$className.'.php')
 								throw new CException(Yii::t('yii','Class name "{class}" does not match class file "{file}".', array(
 									'{class}'=>$className,
@@ -460,13 +460,13 @@ class YiiBase
 					}
 				}
 				else
-					include($className.'.php');
+                    include_once($className.'.php');
 			}
 			else  // class name with namespace in PHP 5.3
 			{
 				$namespace=str_replace('\\','.',ltrim($className,'\\'));
 				if(($path=self::getPathOfAlias($namespace))!==false && is_file($path.'.php'))
-					include($path.'.php');
+                    include_once($path.'.php');
 				else
 					return false;
 			}
@@ -908,4 +908,4 @@ class YiiBase
 }
 
 spl_autoload_register(array('YiiBase','autoload'));
-require(YII_PATH.'/base/interfaces.php');
+require_once(YII_PATH.'/base/interfaces.php');

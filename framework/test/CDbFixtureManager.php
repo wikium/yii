@@ -116,7 +116,7 @@ class CDbFixtureManager extends CApplicationComponent
 		$this->checkIntegrity(false);
 
 		if(is_file($initFile))
-			require($initFile);
+            require_once($initFile);
 		else
 		{
 			foreach($this->getFixtures() as $tableName=>$fixturePath)
@@ -140,7 +140,7 @@ class CDbFixtureManager extends CApplicationComponent
 	{
 		$initFile=$this->basePath . DIRECTORY_SEPARATOR . $tableName . $this->initScriptSuffix;
 		if(is_file($initFile))
-			require($initFile);
+            require_once($initFile);
 		else
 			$this->truncateTable($tableName);
 	}
@@ -168,7 +168,7 @@ class CDbFixtureManager extends CApplicationComponent
 		$builder=$schema->getCommandBuilder();
 		$table=$schema->getTable($tableName);
 
-		foreach(require($fileName) as $alias=>$row)
+		foreach(require_once($fileName) as $alias=>$row)
 		{
 			$builder->createInsertCommand($table,$row)->execute();
 			$primaryKey=$table->primaryKey;

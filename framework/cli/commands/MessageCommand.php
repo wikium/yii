@@ -79,7 +79,7 @@ EOD;
 		if(!is_file($args[0]))
 			$this->usageError("the configuration file {$args[0]} does not exist.");
 
-		$config=require($args[0]);
+		$config=require_once($args[0]);
 		$translator='Yii::t';
 		extract($config);
 
@@ -166,7 +166,7 @@ EOD;
 		echo "Saving messages to $fileName...";
 		if(is_file($fileName))
 		{
-			$translated=require($fileName);
+			$translated=require_once($fileName);
 			sort($messages);
 			ksort($translated);
 			if(array_keys($translated)==$messages)

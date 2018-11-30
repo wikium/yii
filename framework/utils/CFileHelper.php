@@ -302,9 +302,9 @@ class CFileHelper
 	{
 		static $extensions,$customExtensions=array();
 		if($magicFile===null && $extensions===null)
-			$extensions=require(Yii::getPathOfAlias('system.utils.mimeTypes').'.php');
+			$extensions=require_once(Yii::getPathOfAlias('system.utils.mimeTypes').'.php');
 		elseif($magicFile!==null && !isset($customExtensions[$magicFile]))
-			$customExtensions[$magicFile]=require($magicFile);
+			$customExtensions[$magicFile]=require_once($magicFile);
 		if(($ext=self::getExtension($file))!=='')
 		{
 			$ext=strtolower($ext);
@@ -329,9 +329,9 @@ class CFileHelper
 	{
 		static $mimeTypes,$customMimeTypes=array();
 		if($magicFile===null && $mimeTypes===null)
-			$mimeTypes=require(Yii::getPathOfAlias('system.utils.fileExtensions').'.php');
+			$mimeTypes=require_once(Yii::getPathOfAlias('system.utils.fileExtensions').'.php');
 		elseif($magicFile!==null && !isset($customMimeTypes[$magicFile]))
-			$customMimeTypes[$magicFile]=require($magicFile);
+			$customMimeTypes[$magicFile]=require_once($magicFile);
 		if(($mime=self::getMimeType($file))!==null)
 		{
 			$mime=strtolower($mime);

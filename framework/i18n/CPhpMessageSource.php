@@ -144,7 +144,7 @@ class CPhpMessageSource extends CMessageSource
 
 		if(is_file($messageFile))
 		{
-			$messages=include($messageFile);
+			$messages=include_once($messageFile);
 			if(!is_array($messages))
 				$messages=array();
 			if(isset($cache))

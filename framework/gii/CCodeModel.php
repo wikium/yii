@@ -318,7 +318,7 @@ abstract class CCodeModel extends CFormModel
 			$params=$_params_;
 		ob_start();
 		ob_implicit_flush(false);
-		require($templateFile);
+        require_once($templateFile);
 		return ob_get_clean();
 	}
 
@@ -365,7 +365,7 @@ abstract class CCodeModel extends CFormModel
 		$path=$this->getStickyFile();
 		if(is_file($path))
 		{
-			$result=@include($path);
+			$result=@include_once($path);
 			if(is_array($result))
 			{
 				$this->_stickyAttributes=$result;

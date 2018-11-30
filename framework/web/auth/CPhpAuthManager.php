@@ -489,7 +489,7 @@ class CPhpAuthManager extends CAuthManager
 	protected function loadFromFile($file)
 	{
 		if(is_file($file))
-			return require($file);
+			return require_once($file);
 		else
 			return array();
 	}
