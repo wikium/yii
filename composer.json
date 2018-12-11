@@ -84,7 +84,8 @@
             "framework/yii.php",
             "framework/db",
             "framework/base",
-            "framework/web"
+            "framework/web",
+            "framework/validators"
         ]
     },
     "require-dev": {
